@@ -71,7 +71,7 @@ ClayContainer(
 
 ### Rounded `ClayContainer`s
 
-Don't be a square! Use borderRadius to add some flare. If you want a uniform `borderRadius` you can simple set it directly in the `ClayContainer` constructor.
+Don't be a square! Use borderRadius to add some flare. If you want a uniform `borderRadius` you can simply set it directly in the `ClayContainer` constructor.
 
 ```
 ClayContainer(
