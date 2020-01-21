@@ -1,4 +1,4 @@
-library neumorphic_containers;
+library clay_containers;
 
 import 'package:flutter/material.dart';
 
@@ -14,11 +14,21 @@ class ClayContainer extends StatelessWidget {
   final int depth;
 
   ClayContainer(
-      {this.child, this.height, this.width, @required this.color, this.spread, this.borderRadius, this.customBorderRadius, this.curveType, this.depth});
+      {this.child,
+      this.height,
+      this.width,
+      @required this.color,
+      this.spread,
+      this.borderRadius,
+      this.customBorderRadius,
+      this.curveType,
+      this.depth});
 
   Color _getAdjustColor(Color baseColor, amount) {
     Map colors = {
-      "red": baseColor.red, "green": baseColor.green, "blue": baseColor.blue
+      "red": baseColor.red,
+      "green": baseColor.green,
+      "blue": baseColor.blue
     };
     colors = colors.map((key, value) {
       int result = 0;
@@ -64,9 +74,8 @@ class ClayContainer extends StatelessWidget {
     if (customBorderRadius != null) {
       borderRadiusValue = customBorderRadius;
     }
-    final CurveType curveTypeValue = curveType == null
-        ? CurveType.none
-        : curveType;
+    final CurveType curveTypeValue =
+        curveType == null ? CurveType.none : curveType;
 
     List<Color> gradientColors;
     switch (curveTypeValue) {
@@ -80,7 +89,6 @@ class ClayContainer extends StatelessWidget {
         gradientColors = _getFlatGradients(colorValue, depthValue);
         break;
     }
-
 
     return Container(
       height: heightValue,
@@ -102,14 +110,9 @@ class ClayContainer extends StatelessWidget {
                 color: _getAdjustColor(colorValue, 0 - depthValue),
                 offset: Offset(spreadValue, spreadValue),
                 blurRadius: spreadValue)
-          ]
-      ),
+          ]),
     );
   }
 }
 
-enum CurveType {
-  concave,
-  convex,
-  none
-}
+enum CurveType { concave, convex, none }
