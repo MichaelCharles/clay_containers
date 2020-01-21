@@ -1,3 +1,7 @@
+## [0.1.12] - January 22, 2020
+
+* Documentation changes.
+
 ## [0.1.11] - January 22, 2020
 
 * Documentation changes.
