@@ -48,7 +48,7 @@ class MyExampleScreen extends StatelessWidget {
 In the previous example the `ClayContainer` was given `height` and `width`
 since it has no child.
 `ClayContainer` behaves the same as a normal
-`Container` and needs to be either given `height` and `width` or a `child` to be visible. I've also included `Padding` so that the text didn't end up flesh with the edge of the container.
+`Container` and needs to be either given `height` and `width` or a `child` to be visible. In the following example, the `ClayContainer` will receive a child. However, I'm going to wrap that child in some `Padding` in order to make sure it isn't flesh with the edge of the parent container. 
 
 ```
 ClayContainer(
