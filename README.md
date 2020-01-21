@@ -148,3 +148,9 @@ Row(
         ),
 ```
 ![Concave, flat, and convex ClayContainers.](./example_images/concave_convex.png)
+
+### Animate It!
+
+Animation is not something included in this plugin, but having these values abstracted makes it easier to do things like animate your neumorphic elements. You can find the source for the example image below in this project's `./example` folder. 
+
+![Very animated. Much cool.](./example_images/animated.gif)
