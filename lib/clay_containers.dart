@@ -31,7 +31,6 @@ class ClayContainer extends StatelessWidget {
       "blue": baseColor.blue
     };
     colors = colors.map((key, value) {
-      int result = 0;
       if (value + amount < 0) return MapEntry(key, 0);
       if (value + amount > 255) return MapEntry(key, 255);
       return MapEntry(key, value + amount);
