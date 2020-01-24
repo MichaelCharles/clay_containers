@@ -46,10 +46,12 @@ class ClayText extends StatelessWidget {
     Color colorValue = color == null ? Color(0xFFf0f0f0) : color;
     final Color outerColorValue =
         parentColor == null ? colorValue : parentColor;
-    final double fontSizeValue = size == null ? 14 : size;
+    double fontSizeValue = size == null ? 14 : size;
+    final TextStyle styleValue = style == null ? TextStyle() : style;
+    fontSizeValue =
+        styleValue.fontSize != null ? styleValue.fontSize : fontSizeValue;
     final double spreadValue =
         spread == null ? _getSpread(fontSizeValue) : spread;
-    final TextStyle styleValue = style == null ? TextStyle() : style;
     final bool embossValue = emboss == null ? false : emboss;
 
     List<Shadow> shadowList = [

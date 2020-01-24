@@ -12,7 +12,7 @@ Add `clay_containers` to your project as a [dependency in your pubspec.yaml file
 
 ### Simple `ClayContainer`
 For best results, set the background
-color of a surrounding Widget to match
+color of a surrounding widget to match
 the color you will set for your clay
 container. Since it is likely you'll reuse this base color
 multiple times (especially if you end up doing something fancy)
@@ -43,31 +43,27 @@ class MyExampleScreen extends StatelessWidget {
 
 ![ClayContainer example.](./example_images/simple.png)
 
-### `ClayContainer` with Child
+### `ClayContainer` with a `ClayText` Child.
 
-In the previous example the `ClayContainer` was given `height` and `width`
-since it has no child.
-`ClayContainer` behaves the same as a normal
-`Container` and needs to be either given `height` and `width` or a `child` to be visible. In the following example, the `ClayContainer` will receive a child. However, I'm going to wrap that child in some `Padding` in order to make sure it isn't flesh with the edge of the parent container. 
+In the previous example the `ClayContainer` was given `height`
+and `width` since it has no child. `ClayContainer` behaves the
+same as a normal `Container` and needs to be either given
+`height` and `width` or a `child` to be visible. In the
+following example, the `ClayContainer` will receive a child.
+
+The child it will receive is a `ClayText` wrapped in some `Padding`. 
 
 ```
 ClayContainer(
-    color: baseColor,
-    child: Padding(
-      padding: EdgeInsets.all(20),
-      child: Text(
-        "Seize the Clay!",
-        style: TextStyle(
-          fontSize: 40,
-          fontWeight: FontWeight.w200,
-          color: Colors.black45,
+          color: baseColor,
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: ClayText("Seize the Clay!", emboss: true, size: 40),
+          ),
         ),
-      ),
-    ),
-  ),
 ```
 
-![Clay container example with child.](./example_images/simple_child.png)
+![Clay container example with child.](./example_images/simple_child_text.png)
 
 ### Rounded `ClayContainer`s
 
@@ -78,7 +74,7 @@ ClayContainer(
           color: baseColor,
           height: 150,
           width: 150,
-          borderRadius: 75,
+          borderRadius: 50,
         ),
 ```
 ![A rounded ClayContainer.](./example_images/circle.png)
@@ -96,6 +92,21 @@ ClayContainer(
         ),
 ```
 ![A weird shaped ClayContainer.](./example_images/weird.png)
+
+### Embossed `ClayContainer`s
+
+You may have noticed earlier that the `ClayText` can receive an `emboss` property. ClayContainers can as well. All clay widgets start in a debossed state by default. 
+
+```
+ClayContainer(
+          emboss: true,
+          color: baseColor,
+          height: 150,
+          width: 150,
+          borderRadius: 50,
+        ),
+```
+![A rounded ClayContainer.](./example_images/emboss.png)
 
 ### Change Default Spread and Depth
 
@@ -154,3 +165,42 @@ Row(
 Animation is not something included in this plugin, but having these values abstracted makes it easier to do things like animate your neumorphic elements. You can find the source for the example image below in this project's `./example` folder. 
 
 ![Very animated. Much cool.](./example_images/animated.gif)
+
+### Full API Documentation
+
+#### `ClayContainer`
+
+##### Positional Arguments
+
+None.
+
+##### Named Arguments
+
+* **color** - This sets the base color for the clay object. Simply setting this to the background color of the parent object will give you a pretty good looking debossed neumorphic effect.
+* **height** - This sets the height of the container.
+* **width** - This sets the width of the container.
+* **parentColor** - This tells the widget to use a different color for the outside emboss/deboss effect, despite whatever is set in the `color` field.
+* **surfaceColor** - This tells the widget to use a different color for the inside of the container, despite whatever is set in the `color` field.
+* **spread** - How far should the emboss/deboss effect spread?
+* **depth** - How strong should the emboss/deboss effect be?
+* **child** - This receives child widgets.
+* **borderRadius** - This receives a number representing a border radius to be applied to all corners of the container.
+* **customBorderRadius** - This receives a `BorderRadius` object. Setting this object will override whatever is set in the `borderRadius` field.
+* **curveType** - This receives a `CurveType` enum. Use this to set the inside surface to look either convex or concave.
+* **emboss** - This is `false` by default. Set this to `true` in order to make an embossed container. 
+
+
+#### `ClayText`
+
+##### Positional Arguments
+
+* **text** - This is the text to be displayed.
+
+##### Named Arguments
+
+* **color** - This sets the base color for the clay object. Simply setting this to the background color of the parent object will give you a pretty good looking debossed neumorphic effect.
+* **parentColor** - This tells the widget to use a different color for the outside emboss/deboss effect, despite whatever is set in the `color` field.
+* **textColor** - This tells the widget to use a different color for the fill of the text, despite whatever is set in the `color` field.
+* **spread** - How far should the emboss/deboss effect spread?
+* **depth** - How strong should the emboss/deboss effect be?
+* **emboss** - This is `false` by default. Set this to `true` in order to make an embossed container. 

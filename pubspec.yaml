@@ -1,6 +1,6 @@
 name: clay_containers
 description: Easily create custom neumorphic container widgets for your own unique design.
-version: 0.1.12
+version: 0.1.2
 homepage: https://github.com/mcaubrey/clay_containers
 
 environment:
