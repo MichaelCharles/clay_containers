@@ -1,10 +1,10 @@
-![Clay Containers for implementing beautiful, modern neumorphic designs.](./example_images/banner.png)
+![Clay Containers for implementing beautiful, modern neumorphic designs.](https://res.cloudinary.com/mca62511/image/upload/v1579847668/banner_zx6prd.png)
 
 # Clay Containers
 
 Easily create and customize beautiful, modern [neumorphic](https://dribbble.com/tags/neumorphism) containers for your Flutter project. These clay containers can become the basis for your own unique neumorphic designs. 
 
-## Installation
+## Installation 
 
 Add `clay_containers` to your project as a [dependency in your pubspec.yaml file](https://flutter.dev/docs/development/packages-and-plugins/using-packages). This is a simple Dart plugin, so additional configuration for iOS and Android is not needed.
 
@@ -41,7 +41,7 @@ class MyExampleScreen extends StatelessWidget {
 }
 ```
 
-![ClayContainer example.](./example_images/simple.png)
+![ClayContainer example.](https://res.cloudinary.com/mca62511/image/upload/v1579847714/simple_xeh3pd.png)
 
 ### `ClayContainer` with a `ClayText` Child.
 
@@ -63,7 +63,7 @@ ClayContainer(
         ),
 ```
 
-![Clay container example with child.](./example_images/simple_child_text.png)
+![Clay container example with child.](https://res.cloudinary.com/mca62511/image/upload/v1579847742/simple_child_text_jmwjd3.png)
 
 ### Rounded `ClayContainer`s
 
@@ -77,7 +77,7 @@ ClayContainer(
           borderRadius: 50,
         ),
 ```
-![A rounded ClayContainer.](./example_images/circle.png)
+![A rounded ClayContainer.](https://res.cloudinary.com/mca62511/image/upload/v1579847766/circle_ci1at9.png)
 
 If you want to pass your own custom `BorderRadius` object, that is available as well: In that case pass it to `customBorderRadius`. 
 
@@ -91,7 +91,7 @@ ClayContainer(
               bottomLeft: Radius.circular(50)),
         ),
 ```
-![A weird shaped ClayContainer.](./example_images/weird.png)
+![A weird shaped ClayContainer.](https://res.cloudinary.com/mca62511/image/upload/v1579847787/weird_pv8vnk.png)
 
 ### Embossed `ClayContainer`s
 
@@ -106,7 +106,7 @@ ClayContainer(
           borderRadius: 50,
         ),
 ```
-![A rounded ClayContainer.](./example_images/emboss.png)
+![An embossed ClayContainer.](https://res.cloudinary.com/mca62511/image/upload/v1579847811/emboss_coowmd.png)
 
 ### Change Default Spread and Depth
 
@@ -122,7 +122,7 @@ ClayContainer(
           spread: 40,
         ),
 ```
-![A ClayContainer as deep as a freshmen Philosophy class.](./example_images/deep.png)
+![A ClayContainer as deep as a freshmen Philosophy class.](https://res.cloudinary.com/mca62511/image/upload/v1579847841/deep_v010zd.png)
 
 ### Concave and Convex `ClayContainer`s
 
@@ -158,13 +158,13 @@ Row(
           ],
         ),
 ```
-![Concave, flat, and convex ClayContainers.](./example_images/concave_convex.png)
+![Concave, flat, and convex ClayContainers.](https://res.cloudinary.com/mca62511/image/upload/v1579847860/concave_convex_hyafpx.png)
 
 ### Animate It!
 
 Animation is not something included in this plugin, but having these values abstracted makes it easier to do things like animate your neumorphic elements. You can find the source for the example image below in this project's `./example` folder. 
 
-![Very animated. Much cool.](./example_images/animated.gif)
+![Very animated. Much cool.](https://res.cloudinary.com/mca62511/image/upload/c_scale,h_300,w_300/v1579847878/animated_rktpdo.gif)
 
 ### Full API Documentation
 
