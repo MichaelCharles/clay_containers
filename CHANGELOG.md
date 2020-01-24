@@ -1,4 +1,4 @@
-## [0.1.2] - January 24, 2020
+## [0.2.0] - January 24, 2020
 
 * Introduce the `ClayText` widget.
 * Add the `emboss` property to `ClayContainer`s.
@@ -14,6 +14,10 @@
 
 * Documentation changes.
 * Removed unused variable.
+
+## [0.1.2] - January 24, 2020
+
+* This release was a mistake. 0.1.2 is meant to be the release after 0.1.12. I misunderstood the way the version numbering works. 
 
 ## [0.1.1] - January 21, 2020
 
