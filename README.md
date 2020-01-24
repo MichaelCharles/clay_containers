@@ -2,7 +2,7 @@
 
 # Clay Containers
 
-Easily create and customize beautiful, modern neumorphic containers for your Flutter project. These clay containers can become the basis for your own unique neumorphic designs. 
+Easily create and customize beautiful, modern [neumorphic](https://dribbble.com/tags/neumorphism) containers for your Flutter project. These clay containers can become the basis for your own unique neumorphic designs. 
 
 ## Installation
 
