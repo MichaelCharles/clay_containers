@@ -122,7 +122,7 @@ ClayContainer(
           spread: 40,
         ),
 ```
-![Embossed!](https://res.cloudinary.com/mca62511/image/upload/c_scale,w_570/v1579930865/ss__2020-01-25_at_14.34.08_hntksj.png)
+![Embossed!](https://res.cloudinary.com/mca62511/image/upload/v1579847841/deep_v010zd.png)
 
 ### Concave and Convex `ClayContainer`s
 
