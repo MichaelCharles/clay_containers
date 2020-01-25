@@ -106,7 +106,7 @@ ClayContainer(
           borderRadius: 50,
         ),
 ```
-![An embossed ClayContainer.](https://res.cloudinary.com/mca62511/image/upload/v1579847811/emboss_coowmd.png)
+![An embossed ClayContainer.](https://res.cloudinary.com/mca62511/image/upload/c_scale,w_570/v1579930865/ss__2020-01-25_at_14.34.08_hntksj.png)
 
 ### Change Default Spread and Depth
 
@@ -122,7 +122,7 @@ ClayContainer(
           spread: 40,
         ),
 ```
-![A ClayContainer as deep as a freshmen Philosophy class.](https://res.cloudinary.com/mca62511/image/upload/v1579847841/deep_v010zd.png)
+![Embossed!](https://res.cloudinary.com/mca62511/image/upload/c_scale,w_570/v1579930865/ss__2020-01-25_at_14.34.08_hntksj.png)
 
 ### Concave and Convex `ClayContainer`s
 
@@ -172,7 +172,7 @@ Animation is not something included in this plugin, but having these values abst
 
 ##### Positional Arguments
 
-None.
+None. 
 
 ##### Named Arguments
 

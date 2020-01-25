@@ -101,7 +101,8 @@ class ClayContainer extends StatelessWidget {
     ];
 
     if (embossValue) shadowList = shadowList.reversed.toList();
-    if (embossValue) colorValue = _getAdjustColor(colorValue, 0 - depthValue);
+    if (embossValue)
+      colorValue = _getAdjustColor(colorValue, 0 - depthValue ~/ 2);
     if (surfaceColor != null) colorValue = surfaceColorValue;
 
     List<Color> gradientColors;

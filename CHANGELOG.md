@@ -1,3 +1,7 @@
+## [0.2.1] - January 25, 2020
+
+* Made default embossed surfaces brighter.
+
 ## [0.2.0] - January 24, 2020
 
 * Introduce the `ClayText` widget.
