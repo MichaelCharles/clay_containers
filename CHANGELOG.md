@@ -1,3 +1,7 @@
+## [0.2.2] - January 25, 2020
+
+* Yet another minor documentation adjustment.
+
 ## [0.2.1] - January 25, 2020
 
 * Made default embossed surfaces brighter.
