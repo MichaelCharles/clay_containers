@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class ClayContainer extends StatelessWidget {
+  final Duration duration;
+  final Curve curve;
   final double height;
   final double width;
   final Color color;
@@ -28,7 +30,10 @@ class ClayContainer extends StatelessWidget {
       this.customBorderRadius,
       this.curveType,
       this.depth,
-      this.emboss});
+      this.emboss,
+        this.duration,
+        this.curve
+      });
 
   Color _getAdjustColor(Color baseColor, amount) {
     Map colors = {
@@ -118,7 +123,9 @@ class ClayContainer extends StatelessWidget {
         break;
     }
 
-    return Container(
+    return AnimatedContainer(
+      duration: this.duration??Duration(seconds: 1),
+      curve: this.curve??Curves.linear,
       height: heightValue,
       width: widthValue,
       child: child,
