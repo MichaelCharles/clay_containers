@@ -162,10 +162,9 @@ Row(
 
 ### Animate It!
 
-Animation is not something included in this plugin, but having these values abstracted makes it easier to do things like animate your neumorphic elements. You can find the source for the example image below in this project's `./example` folder. 
+You can use a `ClayAnimatedContainer` to create animations in the same way as you would an `AnimatedContainer`. An explanation of `AnimatedContainer`s can be found on the  [Google Developers channel](https://www.youtube.com/watch?v=yI-8QHpGIP4) on YouTube.
 
 ![Very animated. Much cool.](https://res.cloudinary.com/mca62511/image/upload/c_scale,h_300,w_300/v1579847878/animated_rktpdo.gif)
-
 ### Full API Documentation
 
 #### `ClayContainer`
@@ -204,3 +203,15 @@ None.
 * **spread** - How far should the emboss/deboss effect spread?
 * **depth** - How strong should the emboss/deboss effect be?
 * **emboss** - This is `false` by default. Set this to `true` in order to make an embossed container. 
+
+#### `ClayAnimatedContainer`
+
+##### Positional Arguments
+
+None. 
+
+##### Named Arguments
+
+* **duration** - The duration over which to animate the parameters of this container.
+* **curve** - The curve to apply when animating the parameters of this container.
+* **Additional parameters are identical to `ClayContainer`.**
