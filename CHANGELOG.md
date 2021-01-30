@@ -1,3 +1,7 @@
+## [0.2.3] - January 30, 2021
+
+* Added ClayAnimatedContainer thanks to [babakoto](https://github.com/babakoto)
+
 ## [0.2.2] - January 25, 2020
 
 * Yet another minor documentation adjustment.
