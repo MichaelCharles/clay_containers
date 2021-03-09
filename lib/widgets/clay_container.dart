@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 
 class ClayContainer extends StatelessWidget {
-  final double height;
-  final double width;
-  final Color color;
-  final Color parentColor;
-  final Color surfaceColor;
-  final double spread;
-  final Widget child;
-  final double borderRadius;
-  final BorderRadius customBorderRadius;
-  final CurveType curveType;
-  final int depth;
-  final bool emboss;
+  final double? height;
+  final double? width;
+  final Color? color;
+  final Color? parentColor;
+  final Color? surfaceColor;
+  final double? spread;
+  final Widget? child;
+  final double? borderRadius;
+  final BorderRadius? customBorderRadius;
+  final CurveType? curveType;
+  final int? depth;
+  final bool? emboss;
 
   ClayContainer(
       {this.child,
@@ -44,7 +44,7 @@ class ClayContainer extends StatelessWidget {
     return Color.fromRGBO(colors["red"], colors["green"], colors["blue"], 1);
   }
 
-  List<Color> _getFlatGradients(baseColor, depth) {
+  List<Color?> _getFlatGradients(baseColor, depth) {
     return [
       baseColor,
       baseColor,
@@ -67,45 +67,45 @@ class ClayContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double heightValue = height == null ? null : height;
-    final double widthValue = width == null ? null : width;
-    final int depthValue = depth == null ? 20 : depth;
-    Color colorValue = color == null ? Color(0xFFf0f0f0) : color;
+    final double? heightValue = height == null ? null : height;
+    final double? widthValue = width == null ? null : width;
+    final int? depthValue = depth == null ? 20 : depth;
+    Color? colorValue = color == null ? Color(0xFFf0f0f0) : color;
     final Color parentColorValue =
-        parentColor == null ? colorValue : parentColor;
-    final Color surfaceColorValue =
+        parentColor == null ? colorValue! : parentColor!;
+    final Color? surfaceColorValue =
         surfaceColor == null ? colorValue : surfaceColor;
-    final double spreadValue = spread == null ? 6 : spread;
-    final bool embossValue = emboss == null ? false : emboss;
-    BorderRadius borderRadiusValue = borderRadius == null
+    final double spreadValue = spread == null ? 6 : spread!;
+    final bool embossValue = emboss == null ? false : emboss!;
+    BorderRadius? borderRadiusValue = borderRadius == null
         ? BorderRadius.zero
-        : BorderRadius.circular(borderRadius);
+        : BorderRadius.circular(borderRadius!);
 
     if (customBorderRadius != null) {
       borderRadiusValue = customBorderRadius;
     }
     final CurveType curveTypeValue =
-        curveType == null ? CurveType.none : curveType;
+        curveType == null ? CurveType.none : curveType!;
 
     List<BoxShadow> shadowList = [
       BoxShadow(
           color: _getAdjustColor(
-              parentColorValue, embossValue ? 0 - depthValue : depthValue),
+              parentColorValue, embossValue ? 0 - depthValue! : depthValue),
           offset: Offset(0 - spreadValue, 0 - spreadValue),
           blurRadius: spreadValue),
       BoxShadow(
           color: _getAdjustColor(
-              parentColorValue, embossValue ? depthValue : 0 - depthValue),
+              parentColorValue, embossValue ? depthValue : 0 - depthValue!),
           offset: Offset(spreadValue, spreadValue),
           blurRadius: spreadValue)
     ];
 
     if (embossValue) shadowList = shadowList.reversed.toList();
     if (embossValue)
-      colorValue = _getAdjustColor(colorValue, 0 - depthValue ~/ 2);
+      colorValue = _getAdjustColor(colorValue!, 0 - depthValue! ~/ 2);
     if (surfaceColor != null) colorValue = surfaceColorValue;
 
-    List<Color> gradientColors;
+    late List<Color?> gradientColors;
     switch (curveTypeValue) {
       case CurveType.concave:
         gradientColors = _getConcaveGradients(colorValue, depthValue);
@@ -128,7 +128,7 @@ class ClayContainer extends StatelessWidget {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: gradientColors),
+              colors: gradientColors as List<Color>),
           boxShadow: shadowList),
     );
   }

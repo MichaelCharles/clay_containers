@@ -14,7 +14,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   double secondDepth = 50;
   double thirdDepth = 50;
   double fourthDepth = 50;
-  AnimationController _animationController;
+  late AnimationController _animationController;
 
   @override
   void initState() {
@@ -38,20 +38,20 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    double stagger(value, progress, delay) {
+    double? stagger(value, progress, delay) {
       progress = progress - (1 - delay);
       if (progress < 0) progress = 0;
       return value * (progress / delay);
     }
 
     double calculatedFirstDepth =
-        stagger(firstDepth, _animationController.value, 0.25);
+        stagger(firstDepth, _animationController.value, 0.25)!;
     double calculatedSecondDepth =
-        stagger(secondDepth, _animationController.value, 0.5);
+        stagger(secondDepth, _animationController.value, 0.5)!;
     double calculatedThirdDepth =
-        stagger(thirdDepth, _animationController.value, 0.75);
+        stagger(thirdDepth, _animationController.value, 0.75)!;
     double calculatedFourthDepth =
-        stagger(fourthDepth, _animationController.value, 1);
+        stagger(fourthDepth, _animationController.value, 1)!;
 
     return Container(
       color: baseColor,
