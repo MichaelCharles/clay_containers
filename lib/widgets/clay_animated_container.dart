@@ -48,7 +48,7 @@ class ClayAnimatedContainer extends StatelessWidget {
     return Color.fromRGBO(colors["red"], colors["green"], colors["blue"], 1);
   }
 
-  List<Color?> _getFlatGradients(baseColor, depth) {
+  List<Color> _getFlatGradients(baseColor, depth) {
     return [
       baseColor,
       baseColor,

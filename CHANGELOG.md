@@ -1,4 +1,8 @@
-## [0.3.1] - March 9, 2021
+## [0.3.2] - March 9, 2021
+
+* Hotfix: Same as 0.3.1, but for ClayAnimatedContainer.
+
+## [0.3.2] - March 9, 2021
 
 * Hotfix: Fixed problem where clay containers without a curve would throw an error.
 
