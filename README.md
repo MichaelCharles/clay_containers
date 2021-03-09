@@ -4,6 +4,9 @@
 
 Easily create and customize beautiful, modern [neumorphic](https://dribbble.com/tags/neumorphism) containers for your Flutter project. These clay containers can become the basis for your own unique neumorphic designs. 
 
+## Version 0.3.0 -- Null Safety!
+
+Thanks to [Sameerkash](https://github.com/Sameerkash) the project has been migrated to null safety as the 0.3.0 (the current version).
 ## Installation 
 
 Add `clay_containers` to your project as a [dependency in your pubspec.yaml file](https://flutter.dev/docs/development/packages-and-plugins/using-packages). This is a simple Dart plugin, so additional configuration for iOS and Android is not needed.

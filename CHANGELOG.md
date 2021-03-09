@@ -1,3 +1,7 @@
+## [0.3.0] - March 9, 2021
+
+* Null Safety! Thanks to [Sameerkash](https://github.com/Sameerkash)
+
 ## [0.2.3] - January 30, 2021
 
 * Added ClayAnimatedContainer thanks to [babakoto](https://github.com/babakoto)
