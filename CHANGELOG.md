@@ -1,3 +1,7 @@
+## [0.3.1] - March 9, 2021
+
+* Hotfix: Fixed problem where clay containers without a curve would throw an error.
+
 ## [0.3.0] - March 9, 2021
 
 * Null Safety! Thanks to [Sameerkash](https://github.com/Sameerkash)
