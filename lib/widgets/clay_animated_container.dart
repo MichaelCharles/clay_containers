@@ -17,9 +17,10 @@ class ClayAnimatedContainer extends StatelessWidget {
   final CurveType? curveType;
   final int? depth;
   final bool? emboss;
+  final VoidCallback? onEnd;
 
-  ClayAnimatedContainer(
-      {this.child,
+  ClayAnimatedContainer({
+      this.child,
       this.height,
       this.width,
       this.color,
@@ -32,7 +33,9 @@ class ClayAnimatedContainer extends StatelessWidget {
       this.depth,
       this.emboss,
       this.duration,
-      this.curve});
+      this.curve,
+      this.onEnd,
+    });
 
   Color _getAdjustColor(Color baseColor, amount) {
     Map colors = {
@@ -123,6 +126,7 @@ class ClayAnimatedContainer extends StatelessWidget {
     }
 
     return AnimatedContainer(
+      onEnd: this.onEnd ?? null,
       duration: this.duration ?? Duration(seconds: 1),
       curve: this.curve ?? Curves.linear,
       height: heightValue,
