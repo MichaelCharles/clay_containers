@@ -126,7 +126,7 @@ class ClayAnimatedContainer extends StatelessWidget {
     }
 
     return AnimatedContainer(
-      onEnd: this.onEnd ?? null,
+      onEnd: this.onEnd,
       duration: this.duration ?? Duration(seconds: 1),
       curve: this.curve ?? Curves.linear,
       height: heightValue,
