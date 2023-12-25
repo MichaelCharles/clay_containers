@@ -7,23 +7,23 @@ class ClayText extends StatelessWidget {
     super.key,
     this.parentColor,
     this.textColor,
-    this.color,
+    this.color = const Color(0xFFf0f0f0),
     this.spread,
-    this.depth,
-    this.style,
-    this.size,
-    this.emboss,
+    this.depth = 40,
+    this.style = const TextStyle(),
+    this.size = 14,
+    this.emboss = false,
   });
 
   final String text;
-  final Color? color;
+  final Color color;
   final Color? parentColor;
   final Color? textColor;
-  final TextStyle? style;
+  final TextStyle style;
   final double? spread;
-  final int? depth;
-  final double? size;
-  final bool? emboss;
+  final int depth;
+  final double size;
+  final bool emboss;
 
   double? _getSpread(double base) {
     final calculated = (base / 10).floor().toDouble();
@@ -32,20 +32,17 @@ class ClayText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final depthValue = depth ?? 40;
-    var colorValue = color ?? const Color(0xFFf0f0f0);
+    var colorValue = color;
     final outerColorValue = parentColor ?? colorValue;
-    var fontSizeValue = size ?? 14;
-    final styleValue = style ?? const TextStyle();
-    fontSizeValue = styleValue.fontSize ?? fontSizeValue;
+    var fontSizeValue = size;
+    fontSizeValue = style.fontSize ?? fontSizeValue;
     final spreadValue = spread ?? _getSpread(fontSizeValue)!;
-    final embossValue = emboss ?? false;
 
     var shadowList = <Shadow>[
       Shadow(
         color: ClayUtils.getAdjustColor(
           outerColorValue,
-          embossValue ? 0 - depthValue : depthValue,
+          emboss ? 0 - depth : depth,
         ),
         offset: Offset(0 - spreadValue / 2, 0 - spreadValue / 2),
         blurRadius: spreadValue,
@@ -53,22 +50,22 @@ class ClayText extends StatelessWidget {
       Shadow(
         color: ClayUtils.getAdjustColor(
           outerColorValue,
-          embossValue ? depthValue : 0 - depthValue,
+          emboss ? depth : 0 - depth,
         ),
         offset: Offset(spreadValue / 2, spreadValue / 2),
         blurRadius: spreadValue,
       ),
     ];
 
-    if (embossValue) shadowList = shadowList.reversed.toList();
-    if (embossValue) {
-      colorValue = ClayUtils.getAdjustColor(colorValue, 0 - depthValue);
+    if (emboss) shadowList = shadowList.reversed.toList();
+    if (emboss) {
+      colorValue = ClayUtils.getAdjustColor(colorValue, 0 - depth);
     }
     if (textColor != null) colorValue = textColor!;
 
     return Text(
       text,
-      style: styleValue.copyWith(
+      style: style.copyWith(
         color: colorValue,
         shadows: shadowList,
         fontSize: fontSizeValue,
