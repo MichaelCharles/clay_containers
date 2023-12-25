@@ -7,7 +7,7 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
@@ -40,10 +40,10 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    double? stagger(value, progress, delay) {
-      progress = progress - (1 - delay);
-      if (progress < 0) progress = 0;
-      return value * (progress / delay);
+    double? stagger(double value, double progress, double delay) {
+      var newProgress = progress - (1 - delay);
+      if (newProgress < 0) newProgress = 0;
+      return value * (newProgress / delay);
     }
 
     final calculatedFirstDepth =
@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     final calculatedFourthDepth =
         stagger(fourthDepth, _animationController.value, 1)!;
 
-    return Container(
+    return ColoredBox(
       color: baseColor,
       child: Center(
         child: ClayContainer(
@@ -76,21 +76,23 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
               color: baseColor,
               child: Center(
                 child: ClayContainer(
-                    height: 160,
-                    width: 160,
-                    borderRadius: 200,
-                    color: baseColor,
-                    depth: calculatedThirdDepth.toInt(),
-                    curveType: CurveType.concave,
-                    child: Center(
-                        child: ClayContainer(
+                  height: 160,
+                  width: 160,
+                  borderRadius: 200,
+                  color: baseColor,
+                  depth: calculatedThirdDepth.toInt(),
+                  curveType: CurveType.concave,
+                  child: Center(
+                    child: ClayContainer(
                       height: 120,
                       width: 120,
                       borderRadius: 200,
                       color: baseColor,
                       depth: calculatedFourthDepth.toInt(),
                       curveType: CurveType.convex,
-                    ),),),
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
@@ -99,4 +101,3 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     );
   }
 }
-
