@@ -65,6 +65,22 @@ class _ClayContainerState extends State<ClayContainer> {
   }
 
   @override
+  void didUpdateWidget(covariant ClayContainer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final clayTheme = context.clayTheme;
+    height = widget.height ?? clayTheme?.height;
+    width = widget.width ?? clayTheme?.width;
+    color = widget.color ?? clayTheme?.color ?? const Color(0xFFf0f0f0);
+    parentColor = widget.parentColor ?? clayTheme?.parentColor;
+    surfaceColor = widget.surfaceColor ?? clayTheme?.surfaceColor;
+    borderRadius = widget.borderRadius ?? clayTheme?.borderRadius;
+    customBorderRadius =
+        widget.customBorderRadius ?? clayTheme?.customBorderRadius;
+    depth = widget.depth ?? clayTheme?.depth ?? 20;
+    spread = widget.spread ?? clayTheme?.spread ?? 6;
+  }
+
+  @override
   Widget build(BuildContext context) {
     var colorValue = color;
     final parentColorValue = parentColor ?? colorValue;
