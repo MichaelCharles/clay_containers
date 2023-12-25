@@ -1,14 +1,15 @@
 import 'package:clay_containers/constants.dart';
+import 'package:clay_containers/extensions/context_extensions.dart';
 import 'package:clay_containers/utils/clay_utils.dart';
 import 'package:flutter/material.dart';
 
-class ClayAnimatedContainer extends StatelessWidget {
+class ClayAnimatedContainer extends StatefulWidget {
   const ClayAnimatedContainer({
     super.key,
     this.child,
     this.height,
     this.width,
-    this.color = const Color(0xFFf0f0f0),
+    this.color,
     this.surfaceColor,
     this.parentColor,
     this.spread = 6,
@@ -26,7 +27,7 @@ class ClayAnimatedContainer extends StatelessWidget {
   final Curve? curve;
   final double? height;
   final double? width;
-  final Color color;
+  final Color? color;
   final Color? parentColor;
   final Color? surfaceColor;
   final double spread;
@@ -37,6 +38,33 @@ class ClayAnimatedContainer extends StatelessWidget {
   final int depth;
   final bool emboss;
   final VoidCallback? onEnd;
+
+  @override
+  State<ClayAnimatedContainer> createState() => _ClayAnimatedContainerState();
+}
+
+class _ClayAnimatedContainerState extends State<ClayAnimatedContainer> {
+  late double? height;
+  late double? width;
+  late Color color;
+  late Color? parentColor;
+  late Color? surfaceColor;
+  late double? borderRadius;
+  late BorderRadius? customBorderRadius;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final clayTheme = context.clayTheme;
+    height = widget.height ?? clayTheme?.height;
+    width = widget.width ?? clayTheme?.width;
+    color = widget.color ?? clayTheme?.color ?? const Color(0xFFf0f0f0);
+    parentColor = widget.parentColor ?? clayTheme?.parentColor;
+    surfaceColor = widget.surfaceColor ?? clayTheme?.surfaceColor;
+    borderRadius = widget.borderRadius ?? clayTheme?.borderRadius;
+    customBorderRadius =
+        widget.customBorderRadius ?? clayTheme?.customBorderRadius;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,47 +78,48 @@ class ClayAnimatedContainer extends StatelessWidget {
     if (customBorderRadius != null) {
       borderRadiusValue = customBorderRadius;
     }
-    final curveTypeValue = curveType == null ? CurveType.none : curveType!;
+    final curveTypeValue = widget.curveType ?? CurveType.none;
 
     var shadowList = <BoxShadow>[
       BoxShadow(
         color: ClayUtils.getAdjustColor(
           parentColorValue,
-          emboss ? 0 - depth : depth,
+          widget.emboss ? 0 - widget.depth : widget.depth,
         ),
-        offset: Offset(0 - spread, 0 - spread),
-        blurRadius: spread,
+        offset: Offset(0 - widget.spread, 0 - widget.spread),
+        blurRadius: widget.spread,
       ),
       BoxShadow(
         color: ClayUtils.getAdjustColor(
           parentColorValue,
-          emboss ? depth : 0 - depth,
+          widget.emboss ? widget.depth : 0 - widget.depth,
         ),
-        offset: Offset(spread, spread),
-        blurRadius: spread,
+        offset: Offset(widget.spread, widget.spread),
+        blurRadius: widget.spread,
       ),
     ];
 
-    if (emboss) shadowList = shadowList.reversed.toList();
-    if (emboss) {
-      colorValue = ClayUtils.getAdjustColor(colorValue, 0 - depth ~/ 2);
+    if (widget.emboss) shadowList = shadowList.reversed.toList();
+    if (widget.emboss) {
+      colorValue = ClayUtils.getAdjustColor(colorValue, 0 - widget.depth ~/ 2);
     }
     if (surfaceColor != null) colorValue = surfaceColorValue;
 
     late List<Color?> gradientColors;
     switch (curveTypeValue) {
       case CurveType.concave:
-        gradientColors = ClayUtils.getConcaveGradients(colorValue, depth);
+        gradientColors =
+            ClayUtils.getConcaveGradients(colorValue, widget.depth);
       case CurveType.convex:
-        gradientColors = ClayUtils.getConvexGradients(colorValue, depth);
+        gradientColors = ClayUtils.getConvexGradients(colorValue, widget.depth);
       case CurveType.none:
-        gradientColors = ClayUtils.getFlatGradients(colorValue, depth);
+        gradientColors = ClayUtils.getFlatGradients(colorValue, widget.depth);
     }
 
     return AnimatedContainer(
-      duration: duration ?? const Duration(seconds: 1),
-      onEnd: onEnd,
-      curve: curve ?? Curves.linear,
+      duration: widget.duration ?? const Duration(seconds: 1),
+      onEnd: widget.onEnd,
+      curve: widget.curve ?? Curves.linear,
       height: height,
       width: width,
       decoration: BoxDecoration(
@@ -103,7 +132,7 @@ class ClayAnimatedContainer extends StatelessWidget {
         ),
         boxShadow: shadowList,
       ),
-      child: child,
+      child: widget.child,
     );
   }
 }

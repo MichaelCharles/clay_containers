@@ -6,10 +6,10 @@ class ClayTheme extends InheritedWidget {
 
   final ClayThemeData themeData;
 
-  ClayThemeData? of(BuildContext context) {
+  static ClayThemeData? of(BuildContext context) {
     return context.findAncestorWidgetOfExactType<ClayTheme>()?.themeData;
   }
 
   @override
-  bool updateShouldNotify(covariant ClayTheme _) => true;
+  bool updateShouldNotify(covariant ClayTheme oldWidget) => true;
 }
