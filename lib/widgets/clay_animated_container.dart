@@ -1,4 +1,5 @@
 import 'package:clay_containers/constants.dart';
+import 'package:clay_containers/utils/clay_utils.dart';
 import 'package:flutter/material.dart';
 
 class ClayAnimatedContainer extends StatelessWidget {
@@ -35,41 +36,6 @@ class ClayAnimatedContainer extends StatelessWidget {
   final int? depth;
   final bool? emboss;
 
-  Color _getAdjustColor(Color baseColor, int amount) {
-    var colors = <String, int>{
-      'red': baseColor.red,
-      'green': baseColor.green,
-      'blue': baseColor.blue,
-    };
-    colors = colors.map((key, value) {
-      if (value + amount < 0) return MapEntry(key, 0);
-      if (value + amount > 255) return MapEntry(key, 255);
-      return MapEntry(key, value + amount);
-    });
-    return Color.fromRGBO(colors['red']!, colors['green']!, colors['blue']!, 1);
-  }
-
-  List<Color> _getFlatGradients(Color baseColor, int depth) {
-    return [
-      baseColor,
-      baseColor,
-    ];
-  }
-
-  List<Color> _getConcaveGradients(Color baseColor, int depth) {
-    return [
-      _getAdjustColor(baseColor, 0 - depth),
-      _getAdjustColor(baseColor, depth),
-    ];
-  }
-
-  List<Color> _getConvexGradients(Color baseColor, int depth) {
-    return [
-      _getAdjustColor(baseColor, depth),
-      _getAdjustColor(baseColor, 0 - depth),
-    ];
-  }
-
   @override
   Widget build(BuildContext context) {
     final heightValue = height;
@@ -91,7 +57,7 @@ class ClayAnimatedContainer extends StatelessWidget {
 
     var shadowList = <BoxShadow>[
       BoxShadow(
-        color: _getAdjustColor(
+        color: ClayUtils.getAdjustColor(
           parentColorValue,
           embossValue ? 0 - depthValue : depthValue,
         ),
@@ -99,7 +65,7 @@ class ClayAnimatedContainer extends StatelessWidget {
         blurRadius: spreadValue,
       ),
       BoxShadow(
-        color: _getAdjustColor(
+        color: ClayUtils.getAdjustColor(
           parentColorValue,
           embossValue ? depthValue : 0 - depthValue,
         ),
@@ -110,18 +76,18 @@ class ClayAnimatedContainer extends StatelessWidget {
 
     if (embossValue) shadowList = shadowList.reversed.toList();
     if (embossValue) {
-      colorValue = _getAdjustColor(colorValue, 0 - depthValue ~/ 2);
+      colorValue = ClayUtils.getAdjustColor(colorValue, 0 - depthValue ~/ 2);
     }
     if (surfaceColor != null) colorValue = surfaceColorValue;
 
     late List<Color?> gradientColors;
     switch (curveTypeValue) {
       case CurveType.concave:
-        gradientColors = _getConcaveGradients(colorValue, depthValue);
+        gradientColors = ClayUtils.getConcaveGradients(colorValue, depthValue);
       case CurveType.convex:
-        gradientColors = _getConvexGradients(colorValue, depthValue);
+        gradientColors = ClayUtils.getConvexGradients(colorValue, depthValue);
       case CurveType.none:
-        gradientColors = _getFlatGradients(colorValue, depthValue);
+        gradientColors = ClayUtils.getFlatGradients(colorValue, depthValue);
     }
 
     return AnimatedContainer(
