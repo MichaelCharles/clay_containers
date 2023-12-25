@@ -1,7 +1,7 @@
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(const MaterialApp(home: MyApp()));
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -56,20 +56,12 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
         stagger(fourthDepth, _animationController.value, 1)!;
 
     return ClayTheme(
-      themeData: ClayThemeData(
+      themeData: const ClayThemeData(
         height: 10,
         width: 20,
-        color: const Color(0xFFf0f0f0),
-        // DEFAULT
-        parentColor: const Color(0xFFFFFFFF),
-        surfaceColor: const Color(0xFFFFFFFF),
-        borderRadius: 200,
-        customBorderRadius: null,
+        borderRadius: 360,
         textTheme: ClayTextTheme(style: TextStyle()),
         depth: 12,
-        emboss: false,
-        // DEFAULT
-        spread: null,
       ),
       child: ColoredBox(
         color: baseColor,
