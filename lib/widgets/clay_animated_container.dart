@@ -19,6 +19,7 @@ class ClayAnimatedContainer extends StatelessWidget {
     this.emboss = false,
     this.duration,
     this.curve,
+    this.onEnd,
   });
 
   final Duration? duration;
@@ -35,6 +36,7 @@ class ClayAnimatedContainer extends StatelessWidget {
   final CurveType? curveType;
   final int depth;
   final bool emboss;
+  final VoidCallback? onEnd;
 
   @override
   Widget build(BuildContext context) {
@@ -87,6 +89,7 @@ class ClayAnimatedContainer extends StatelessWidget {
 
     return AnimatedContainer(
       duration: duration ?? const Duration(seconds: 1),
+      onEnd: onEnd,
       curve: curve ?? Curves.linear,
       height: height,
       width: width,
