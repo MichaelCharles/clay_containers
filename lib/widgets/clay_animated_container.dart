@@ -42,7 +42,7 @@ class ClayAnimatedContainer extends StatelessWidget {
     final widthValue = width;
     final depthValue = depth ?? 20;
     var colorValue = color ?? const Color(0xFFf0f0f0);
-    final parentColorValue = parentColor == null ? colorValue : parentColor!;
+    final parentColorValue = parentColor ?? colorValue;
     final surfaceColorValue = surfaceColor ?? colorValue;
     final spreadValue = spread ?? 6;
     final embossValue = emboss ?? false;
