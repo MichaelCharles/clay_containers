@@ -1,15 +1,17 @@
 import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
-  Color baseColor = Color(0xFFf2f2f2);
+  Color baseColor = const Color(0xFFf2f2f2);
   double firstDepth = 50;
   double secondDepth = 50;
   double thirdDepth = 50;
@@ -20,7 +22,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   void initState() {
     _animationController = AnimationController(
       vsync: this, // the SingleTickerProviderStateMixin
-      duration: Duration(seconds: 5),
+      duration: const Duration(seconds: 5),
     )..addListener(() {
         setState(() {});
       });
@@ -44,13 +46,13 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       return value * (progress / delay);
     }
 
-    double calculatedFirstDepth =
+    final calculatedFirstDepth =
         stagger(firstDepth, _animationController.value, 0.25)!;
-    double calculatedSecondDepth =
+    final calculatedSecondDepth =
         stagger(secondDepth, _animationController.value, 0.5)!;
-    double calculatedThirdDepth =
+    final calculatedThirdDepth =
         stagger(thirdDepth, _animationController.value, 0.75)!;
-    double calculatedFourthDepth =
+    final calculatedFourthDepth =
         stagger(fourthDepth, _animationController.value, 1)!;
 
     return Container(
@@ -88,7 +90,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
                       color: baseColor,
                       depth: calculatedFourthDepth.toInt(),
                       curveType: CurveType.convex,
-                    ))),
+                    ),),),
               ),
             ),
           ),

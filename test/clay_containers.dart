@@ -1,7 +1,6 @@
+import 'package:clay_containers/clay_containers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import '../lib/clay_containers.dart';
 
 void main() {
   testWidgets('ClayContainer can have a child.', (WidgetTester tester) async {
