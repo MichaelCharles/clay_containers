@@ -55,41 +55,54 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     final calculatedFourthDepth =
         stagger(fourthDepth, _animationController.value, 1)!;
 
-    return ColoredBox(
-      color: baseColor,
-      child: Center(
-        child: ClayContainer(
-          color: baseColor,
-          height: 240,
-          width: 240,
-          borderRadius: 200,
-          curveType: CurveType.concave,
-          spread: 30,
-          depth: calculatedFirstDepth.toInt(),
-          child: Center(
-            child: ClayContainer(
-              height: 200,
-              width: 200,
-              borderRadius: 200,
-              depth: calculatedSecondDepth.toInt(),
-              curveType: CurveType.convex,
-              color: baseColor,
-              child: Center(
-                child: ClayContainer(
-                  height: 160,
-                  width: 160,
-                  borderRadius: 200,
-                  color: baseColor,
-                  depth: calculatedThirdDepth.toInt(),
-                  curveType: CurveType.concave,
-                  child: Center(
-                    child: ClayContainer(
-                      height: 120,
-                      width: 120,
-                      borderRadius: 200,
-                      color: baseColor,
-                      depth: calculatedFourthDepth.toInt(),
-                      curveType: CurveType.convex,
+    return ClayTheme(
+      themeData: ClayThemeData(
+        height: 10,
+        width: 20,
+        color: const Color(0xFFf0f0f0),
+        // DEFAULT
+        parentColor: const Color(0xFFFFFFFF),
+        surfaceColor: const Color(0xFFFFFFFF),
+        borderRadius: 200,
+        customBorderRadius: null,
+        textTheme: ClayTextTheme(style: TextStyle()),
+        depth: 12,
+        emboss: false,
+        // DEFAULT
+        spread: null,
+      ),
+      child: ColoredBox(
+        color: baseColor,
+        child: Center(
+          child: ClayContainer(
+            color: baseColor,
+            height: 240,
+            width: 240,
+            curveType: CurveType.concave,
+            spread: 30,
+            depth: calculatedFirstDepth.toInt(),
+            child: Center(
+              child: ClayContainer(
+                height: 200,
+                width: 200,
+                depth: calculatedSecondDepth.toInt(),
+                curveType: CurveType.convex,
+                color: baseColor,
+                child: Center(
+                  child: ClayContainer(
+                    height: 160,
+                    width: 160,
+                    color: baseColor,
+                    depth: calculatedThirdDepth.toInt(),
+                    curveType: CurveType.concave,
+                    child: Center(
+                      child: ClayContainer(
+                        height: 120,
+                        width: 120,
+                        color: baseColor,
+                        depth: calculatedFourthDepth.toInt(),
+                        curveType: CurveType.convex,
+                      ),
                     ),
                   ),
                 ),
