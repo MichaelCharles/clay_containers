@@ -12,12 +12,12 @@ class ClayAnimatedContainer extends StatefulWidget {
     this.color,
     this.surfaceColor,
     this.parentColor,
-    this.spread = 6,
+    this.spread,
     this.borderRadius,
     this.customBorderRadius,
     this.curveType,
-    this.depth = 20,
-    this.emboss = false,
+    this.depth,
+    this.emboss,
     this.duration,
     this.curve,
     this.onEnd,
@@ -30,13 +30,13 @@ class ClayAnimatedContainer extends StatefulWidget {
   final Color? color;
   final Color? parentColor;
   final Color? surfaceColor;
-  final double spread;
+  final double? spread;
   final Widget? child;
   final double? borderRadius;
   final BorderRadius? customBorderRadius;
   final CurveType? curveType;
-  final int depth;
-  final bool emboss;
+  final int? depth;
+  final bool? emboss;
   final VoidCallback? onEnd;
 
   @override
@@ -51,6 +51,9 @@ class _ClayAnimatedContainerState extends State<ClayAnimatedContainer> {
   late Color? surfaceColor;
   late double? borderRadius;
   late BorderRadius? customBorderRadius;
+  late int depth;
+  late double spread;
+  late bool emboss;
 
   @override
   void didChangeDependencies() {
@@ -64,6 +67,9 @@ class _ClayAnimatedContainerState extends State<ClayAnimatedContainer> {
     borderRadius = widget.borderRadius ?? clayTheme?.borderRadius;
     customBorderRadius =
         widget.customBorderRadius ?? clayTheme?.customBorderRadius;
+    depth = widget.depth ?? clayTheme?.depth ?? 20;
+    spread = widget.spread ?? clayTheme?.spread ?? 6;
+    emboss = widget.emboss ?? clayTheme?.emboss ?? false;
   }
 
   @override
@@ -84,36 +90,35 @@ class _ClayAnimatedContainerState extends State<ClayAnimatedContainer> {
       BoxShadow(
         color: ClayUtils.getAdjustColor(
           parentColorValue,
-          widget.emboss ? 0 - widget.depth : widget.depth,
+          emboss ? 0 - depth : depth,
         ),
-        offset: Offset(0 - widget.spread, 0 - widget.spread),
-        blurRadius: widget.spread,
+        offset: Offset(0 - spread, 0 - spread),
+        blurRadius: spread,
       ),
       BoxShadow(
         color: ClayUtils.getAdjustColor(
           parentColorValue,
-          widget.emboss ? widget.depth : 0 - widget.depth,
+          emboss ? depth : 0 - depth,
         ),
-        offset: Offset(widget.spread, widget.spread),
-        blurRadius: widget.spread,
+        offset: Offset(spread, spread),
+        blurRadius: spread,
       ),
     ];
 
-    if (widget.emboss) shadowList = shadowList.reversed.toList();
-    if (widget.emboss) {
-      colorValue = ClayUtils.getAdjustColor(colorValue, 0 - widget.depth ~/ 2);
+    if (emboss) shadowList = shadowList.reversed.toList();
+    if (emboss) {
+      colorValue = ClayUtils.getAdjustColor(colorValue, 0 - depth ~/ 2);
     }
     if (surfaceColor != null) colorValue = surfaceColorValue;
 
     late List<Color?> gradientColors;
     switch (curveTypeValue) {
       case CurveType.concave:
-        gradientColors =
-            ClayUtils.getConcaveGradients(colorValue, widget.depth);
+        gradientColors = ClayUtils.getConcaveGradients(colorValue, depth);
       case CurveType.convex:
-        gradientColors = ClayUtils.getConvexGradients(colorValue, widget.depth);
+        gradientColors = ClayUtils.getConvexGradients(colorValue, depth);
       case CurveType.none:
-        gradientColors = ClayUtils.getFlatGradients(colorValue, widget.depth);
+        gradientColors = ClayUtils.getFlatGradients(colorValue, depth);
     }
 
     return AnimatedContainer(

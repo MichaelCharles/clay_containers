@@ -12,11 +12,11 @@ class ClayContainer extends StatefulWidget {
     this.color,
     this.surfaceColor,
     this.parentColor,
-    this.spread = 6,
+    this.spread,
     this.borderRadius,
     this.customBorderRadius,
     this.curveType,
-    this.depth = 20,
+    this.depth,
     this.emboss = false,
   });
 
@@ -25,12 +25,12 @@ class ClayContainer extends StatefulWidget {
   final Color? color;
   final Color? parentColor;
   final Color? surfaceColor;
-  final double spread;
+  final double? spread;
   final Widget? child;
   final double? borderRadius;
   final BorderRadius? customBorderRadius;
   final CurveType? curveType;
-  final int depth;
+  final int? depth;
   final bool emboss;
 
   @override
@@ -45,6 +45,8 @@ class _ClayContainerState extends State<ClayContainer> {
   late Color? surfaceColor;
   late double? borderRadius;
   late BorderRadius? customBorderRadius;
+  late int depth;
+  late double spread;
 
   @override
   void didChangeDependencies() {
@@ -58,6 +60,8 @@ class _ClayContainerState extends State<ClayContainer> {
     borderRadius = widget.borderRadius ?? clayTheme?.borderRadius;
     customBorderRadius =
         widget.customBorderRadius ?? clayTheme?.customBorderRadius;
+    depth = widget.depth ?? clayTheme?.depth ?? 20;
+    spread = widget.spread ?? clayTheme?.spread ?? 6;
   }
 
   @override
@@ -78,24 +82,24 @@ class _ClayContainerState extends State<ClayContainer> {
       BoxShadow(
         color: ClayUtils.getAdjustColor(
           parentColorValue,
-          widget.emboss ? 0 - widget.depth : widget.depth,
+          widget.emboss ? 0 - depth : depth,
         ),
-        offset: Offset(0 - widget.spread, 0 - widget.spread),
-        blurRadius: widget.spread,
+        offset: Offset(0 - spread, 0 - spread),
+        blurRadius: spread,
       ),
       BoxShadow(
         color: ClayUtils.getAdjustColor(
           parentColorValue,
-          widget.emboss ? widget.depth : 0 - widget.depth,
+          widget.emboss ? depth : 0 - depth,
         ),
-        offset: Offset(widget.spread, widget.spread),
-        blurRadius: widget.spread,
+        offset: Offset(spread, spread),
+        blurRadius: spread,
       ),
     ];
 
     if (widget.emboss) shadowList = shadowList.reversed.toList();
     if (widget.emboss) {
-      colorValue = ClayUtils.getAdjustColor(colorValue, 0 - widget.depth ~/ 2);
+      colorValue = ClayUtils.getAdjustColor(colorValue, 0 - depth ~/ 2);
     }
     if (surfaceColor != null) colorValue = surfaceColorValue;
 
@@ -104,17 +108,17 @@ class _ClayContainerState extends State<ClayContainer> {
       case CurveType.concave:
         gradientColors = ClayUtils.getConcaveGradients(
           colorValue,
-          widget.depth,
+          depth,
         );
       case CurveType.convex:
         gradientColors = ClayUtils.getConvexGradients(
           colorValue,
-          widget.depth,
+          depth,
         );
       case CurveType.none:
         gradientColors = ClayUtils.getFlatGradients(
           colorValue,
-          widget.depth,
+          depth,
         );
     }
 
