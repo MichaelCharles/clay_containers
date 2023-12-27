@@ -2,18 +2,16 @@
 
 # Clay Containers
 
-Easily create and customize beautiful, modern [neumorphic](https://dribbble.com/tags/neumorphism) containers for your Flutter project. These clay containers can become the basis for your own unique neumorphic designs. 
+Easily create and customize beautiful, modern [neumorphic](https://dribbble.com/tags/neumorphism) containers for your Flutter project. These clay containers can become the basis for your own unique neumorphic designs.
 
-## Version 0.3.0 -- Null Safety!
-
-Thanks to [Sameerkash](https://github.com/Sameerkash) the project has been migrated to null safety as the 0.3.0 (the current version).
-## Installation 
+## Installation
 
 Add `clay_containers` to your project as a [dependency in your pubspec.yaml file](https://flutter.dev/docs/development/packages-and-plugins/using-packages). This is a simple Dart plugin, so additional configuration for iOS and Android is not needed.
 
 ## Examples
 
 ### Simple `ClayContainer`
+
 For best results, set the background
 color of a surrounding widget to match
 the color you will set for your clay
@@ -54,7 +52,7 @@ same as a normal `Container` and needs to be either given
 `height` and `width` or a `child` to be visible. In the
 following example, the `ClayContainer` will receive a child.
 
-The child it will receive is a `ClayText` wrapped in some `Padding`. 
+The child it will receive is a `ClayText` wrapped in some `Padding`.
 
 ```
 ClayContainer(
@@ -80,9 +78,10 @@ ClayContainer(
           borderRadius: 50,
         ),
 ```
+
 ![A rounded ClayContainer.](https://res.cloudinary.com/mca62511/image/upload/v1579847766/circle_ci1at9.png)
 
-If you want to pass your own custom `BorderRadius` object, that is available as well: In that case pass it to `customBorderRadius`. 
+If you want to pass your own custom `BorderRadius` object, that is available as well: In that case pass it to `customBorderRadius`.
 
 ```
 ClayContainer(
@@ -94,11 +93,12 @@ ClayContainer(
               bottomLeft: Radius.circular(50)),
         ),
 ```
+
 ![A weird shaped ClayContainer.](https://res.cloudinary.com/mca62511/image/upload/v1579847787/weird_pv8vnk.png)
 
 ### Embossed `ClayContainer`s
 
-You may have noticed earlier that the `ClayText` can receive an `emboss` property. ClayContainers can as well. All clay widgets start in a debossed state by default. 
+You may have noticed earlier that the `ClayText` can receive an `emboss` property. ClayContainers can as well. All clay widgets start in a debossed state by default.
 
 ```
 ClayContainer(
@@ -109,11 +109,12 @@ ClayContainer(
           borderRadius: 50,
         ),
 ```
+
 ![An embossed ClayContainer.](https://res.cloudinary.com/mca62511/image/upload/c_scale,w_570/v1579930865/ss__2020-01-25_at_14.34.08_hntksj.png)
 
 ### Change Default Spread and Depth
 
-Don't like the default look of the neumorphic effect? Change the base variables. Do whatever you want. I'm not your mom. 
+Don't like the default look of the neumorphic effect? Change the base variables. Do whatever you want. I'm not your mom.
 
 ```
 ClayContainer(
@@ -125,11 +126,12 @@ ClayContainer(
           spread: 40,
         ),
 ```
+
 ![Embossed!](https://res.cloudinary.com/mca62511/image/upload/v1579847841/deep_v010zd.png)
 
 ### Concave and Convex `ClayContainer`s
 
-Give your `ClayContainer` a convex or a concave look by passing either `CurveType.concave` or `CurveType.convex` to the `curveType` parameter. 
+Give your `ClayContainer` a convex or a concave look by passing either `CurveType.concave` or `CurveType.convex` to the `curveType` parameter.
 
 ```
 Row(
@@ -161,60 +163,61 @@ Row(
           ],
         ),
 ```
+
 ![Concave, flat, and convex ClayContainers.](https://res.cloudinary.com/mca62511/image/upload/v1579847860/concave_convex_hyafpx.png)
 
 ### Animate It!
 
-You can use a `ClayAnimatedContainer` to create animations in the same way as you would an `AnimatedContainer`. An explanation of `AnimatedContainer`s can be found on the  [Google Developers channel](https://www.youtube.com/watch?v=yI-8QHpGIP4) on YouTube.
+You can use a `ClayAnimatedContainer` to create animations in the same way as you would an `AnimatedContainer`. An explanation of `AnimatedContainer`s can be found on the [Google Developers channel](https://www.youtube.com/watch?v=yI-8QHpGIP4) on YouTube.
 
 ![Very animated. Much cool.](https://res.cloudinary.com/mca62511/image/upload/c_scale,h_300,w_300/v1579847878/animated_rktpdo.gif)
+
 ### Full API Documentation
 
 #### `ClayContainer`
 
 ##### Positional Arguments
 
-None. 
+None.
 
 ##### Named Arguments
 
-* **color** - This sets the base color for the clay object. Simply setting this to the background color of the parent object will give you a pretty good looking debossed neumorphic effect.
-* **height** - This sets the height of the container.
-* **width** - This sets the width of the container.
-* **parentColor** - This tells the widget to use a different color for the outside emboss/deboss effect, despite whatever is set in the `color` field.
-* **surfaceColor** - This tells the widget to use a different color for the inside of the container, despite whatever is set in the `color` field.
-* **spread** - How far should the emboss/deboss effect spread?
-* **depth** - How strong should the emboss/deboss effect be?
-* **child** - This receives child widgets.
-* **borderRadius** - This receives a number representing a border radius to be applied to all corners of the container.
-* **customBorderRadius** - This receives a `BorderRadius` object. Setting this object will override whatever is set in the `borderRadius` field.
-* **curveType** - This receives a `CurveType` enum. Use this to set the inside surface to look either convex or concave.
-* **emboss** - This is `false` by default. Set this to `true` in order to make an embossed container. 
-
+- **color** - This sets the base color for the clay object. Simply setting this to the background color of the parent object will give you a pretty good looking debossed neumorphic effect.
+- **height** - This sets the height of the container.
+- **width** - This sets the width of the container.
+- **parentColor** - This tells the widget to use a different color for the outside emboss/deboss effect, despite whatever is set in the `color` field.
+- **surfaceColor** - This tells the widget to use a different color for the inside of the container, despite whatever is set in the `color` field.
+- **spread** - How far should the emboss/deboss effect spread?
+- **depth** - How strong should the emboss/deboss effect be?
+- **child** - This receives child widgets.
+- **borderRadius** - This receives a number representing a border radius to be applied to all corners of the container.
+- **customBorderRadius** - This receives a `BorderRadius` object. Setting this object will override whatever is set in the `borderRadius` field.
+- **curveType** - This receives a `CurveType` enum. Use this to set the inside surface to look either convex or concave.
+- **emboss** - This is `false` by default. Set this to `true` in order to make an embossed container.
 
 #### `ClayText`
 
 ##### Positional Arguments
 
-* **text** - This is the text to be displayed.
+- **text** - This is the text to be displayed.
 
 ##### Named Arguments
 
-* **color** - This sets the base color for the clay object. Simply setting this to the background color of the parent object will give you a pretty good looking debossed neumorphic effect.
-* **parentColor** - This tells the widget to use a different color for the outside emboss/deboss effect, despite whatever is set in the `color` field.
-* **textColor** - This tells the widget to use a different color for the fill of the text, despite whatever is set in the `color` field.
-* **spread** - How far should the emboss/deboss effect spread?
-* **depth** - How strong should the emboss/deboss effect be?
-* **emboss** - This is `false` by default. Set this to `true` in order to make an embossed container. 
+- **color** - This sets the base color for the clay object. Simply setting this to the background color of the parent object will give you a pretty good looking debossed neumorphic effect.
+- **parentColor** - This tells the widget to use a different color for the outside emboss/deboss effect, despite whatever is set in the `color` field.
+- **textColor** - This tells the widget to use a different color for the fill of the text, despite whatever is set in the `color` field.
+- **spread** - How far should the emboss/deboss effect spread?
+- **depth** - How strong should the emboss/deboss effect be?
+- **emboss** - This is `false` by default. Set this to `true` in order to make an embossed container.
 
 #### `ClayAnimatedContainer`
 
 ##### Positional Arguments
 
-None. 
+None.
 
 ##### Named Arguments
 
-* **duration** - The duration over which to animate the parameters of this container.
-* **curve** - The curve to apply when animating the parameters of this container.
-* **Additional parameters are identical to `ClayContainer`.**
+- **duration** - The duration over which to animate the parameters of this container.
+- **curve** - The curve to apply when animating the parameters of this container.
+- **Additional parameters are identical to `ClayContainer`.**
