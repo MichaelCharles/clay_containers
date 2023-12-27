@@ -1,8 +1,28 @@
+import 'package:clay_containers/constants.dart';
+import 'package:clay_containers/extensions/context_extensions.dart';
+import 'package:clay_containers/utils/clay_utils.dart';
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
+class ClayAnimatedContainer extends StatefulWidget {
+  const ClayAnimatedContainer({
+    super.key,
+    this.child,
+    this.height,
+    this.width,
+    this.color,
+    this.surfaceColor,
+    this.parentColor,
+    this.spread,
+    this.borderRadius,
+    this.customBorderRadius,
+    this.curveType,
+    this.depth,
+    this.emboss,
+    this.duration,
+    this.curve,
+    this.onEnd,
+  });
 
-class ClayAnimatedContainer extends StatelessWidget {
   final Duration? duration;
   final Curve? curve;
   final double? height;
@@ -17,70 +37,63 @@ class ClayAnimatedContainer extends StatelessWidget {
   final CurveType? curveType;
   final int? depth;
   final bool? emboss;
+  final VoidCallback? onEnd;
 
-  ClayAnimatedContainer(
-      {this.child,
-      this.height,
-      this.width,
-      this.color,
-      this.surfaceColor,
-      this.parentColor,
-      this.spread,
-      this.borderRadius,
-      this.customBorderRadius,
-      this.curveType,
-      this.depth,
-      this.emboss,
-      this.duration,
-      this.curve});
+  @override
+  State<ClayAnimatedContainer> createState() => _ClayAnimatedContainerState();
+}
 
-  Color _getAdjustColor(Color baseColor, amount) {
-    Map colors = {
-      "red": baseColor.red,
-      "green": baseColor.green,
-      "blue": baseColor.blue
-    };
-    colors = colors.map((key, value) {
-      if (value + amount < 0) return MapEntry(key, 0);
-      if (value + amount > 255) return MapEntry(key, 255);
-      return MapEntry(key, value + amount);
-    });
-    return Color.fromRGBO(colors["red"], colors["green"], colors["blue"], 1);
+class _ClayAnimatedContainerState extends State<ClayAnimatedContainer> {
+  late double? height;
+  late double? width;
+  late Color color;
+  late Color? parentColor;
+  late Color? surfaceColor;
+  late double? borderRadius;
+  late BorderRadius? customBorderRadius;
+  late int depth;
+  late double spread;
+  late bool emboss;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final clayTheme = context.clayTheme;
+    height = widget.height ?? clayTheme?.height;
+    width = widget.width ?? clayTheme?.width;
+    color = widget.color ?? clayTheme?.color ?? const Color(0xFFf0f0f0);
+    parentColor = widget.parentColor ?? clayTheme?.parentColor;
+    surfaceColor = widget.surfaceColor ?? clayTheme?.surfaceColor;
+    borderRadius = widget.borderRadius ?? clayTheme?.borderRadius;
+    customBorderRadius =
+        widget.customBorderRadius ?? clayTheme?.customBorderRadius;
+    depth = widget.depth ?? clayTheme?.depth ?? 20;
+    spread = widget.spread ?? clayTheme?.spread ?? 6;
+    emboss = widget.emboss ?? clayTheme?.emboss ?? false;
   }
 
-  List<Color> _getFlatGradients(baseColor, depth) {
-    return [
-      baseColor,
-      baseColor,
-    ];
-  }
-
-  List<Color> _getConcaveGradients(baseColor, depth) {
-    return [
-      _getAdjustColor(baseColor, 0 - depth),
-      _getAdjustColor(baseColor, depth),
-    ];
-  }
-
-  List<Color> _getConvexGradients(baseColor, depth) {
-    return [
-      _getAdjustColor(baseColor, depth),
-      _getAdjustColor(baseColor, 0 - depth),
-    ];
+  @override
+  void didUpdateWidget(covariant ClayAnimatedContainer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final clayTheme = context.clayTheme;
+    height = widget.height ?? clayTheme?.height;
+    width = widget.width ?? clayTheme?.width;
+    color = widget.color ?? clayTheme?.color ?? const Color(0xFFf0f0f0);
+    parentColor = widget.parentColor ?? clayTheme?.parentColor;
+    surfaceColor = widget.surfaceColor ?? clayTheme?.surfaceColor;
+    borderRadius = widget.borderRadius ?? clayTheme?.borderRadius;
+    customBorderRadius =
+        widget.customBorderRadius ?? clayTheme?.customBorderRadius;
+    depth = widget.depth ?? clayTheme?.depth ?? 20;
+    spread = widget.spread ?? clayTheme?.spread ?? 6;
+    emboss = widget.emboss ?? clayTheme?.emboss ?? false;
   }
 
   @override
   Widget build(BuildContext context) {
-    final double? heightValue = height == null ? null : height;
-    final double? widthValue = width == null ? null : width;
-    final int? depthValue = depth == null ? 20 : depth;
-    Color? colorValue = color == null ? Color(0xFFf0f0f0) : color;
-    final Color parentColorValue =
-        parentColor == null ? colorValue! : parentColor!;
-    final Color? surfaceColorValue =
-        surfaceColor == null ? colorValue : surfaceColor;
-    final double spreadValue = spread == null ? 6 : spread!;
-    final bool embossValue = emboss == null ? false : emboss!;
+    var colorValue = color;
+    final parentColorValue = parentColor ?? colorValue;
+    final surfaceColorValue = surfaceColor ?? colorValue;
     BorderRadius? borderRadiusValue = borderRadius == null
         ? BorderRadius.zero
         : BorderRadius.circular(borderRadius!);
@@ -88,54 +101,60 @@ class ClayAnimatedContainer extends StatelessWidget {
     if (customBorderRadius != null) {
       borderRadiusValue = customBorderRadius;
     }
-    final CurveType curveTypeValue =
-        curveType == null ? CurveType.none : curveType!;
+    final curveTypeValue = widget.curveType ?? CurveType.none;
 
-    List<BoxShadow> shadowList = [
+    var shadowList = <BoxShadow>[
       BoxShadow(
-          color: _getAdjustColor(
-              parentColorValue, embossValue ? 0 - depthValue! : depthValue),
-          offset: Offset(0 - spreadValue, 0 - spreadValue),
-          blurRadius: spreadValue),
+        color: ClayUtils.getAdjustColor(
+          parentColorValue,
+          emboss ? 0 - depth : depth,
+        ),
+        offset: Offset(0 - spread, 0 - spread),
+        blurRadius: spread,
+      ),
       BoxShadow(
-          color: _getAdjustColor(
-              parentColorValue, embossValue ? depthValue : 0 - depthValue!),
-          offset: Offset(spreadValue, spreadValue),
-          blurRadius: spreadValue)
+        color: ClayUtils.getAdjustColor(
+          parentColorValue,
+          emboss ? depth : 0 - depth,
+        ),
+        offset: Offset(spread, spread),
+        blurRadius: spread,
+      ),
     ];
 
-    if (embossValue) shadowList = shadowList.reversed.toList();
-    if (embossValue)
-      colorValue = _getAdjustColor(colorValue!, 0 - depthValue! ~/ 2);
+    if (emboss) shadowList = shadowList.reversed.toList();
+    if (emboss) {
+      colorValue = ClayUtils.getAdjustColor(colorValue, 0 - depth ~/ 2);
+    }
     if (surfaceColor != null) colorValue = surfaceColorValue;
 
     late List<Color?> gradientColors;
     switch (curveTypeValue) {
       case CurveType.concave:
-        gradientColors = _getConcaveGradients(colorValue, depthValue);
-        break;
+        gradientColors = ClayUtils.getConcaveGradients(colorValue, depth);
       case CurveType.convex:
-        gradientColors = _getConvexGradients(colorValue, depthValue);
-        break;
+        gradientColors = ClayUtils.getConvexGradients(colorValue, depth);
       case CurveType.none:
-        gradientColors = _getFlatGradients(colorValue, depthValue);
-        break;
+        gradientColors = ClayUtils.getFlatGradients(colorValue, depth);
     }
 
     return AnimatedContainer(
-      duration: this.duration ?? Duration(seconds: 1),
-      curve: this.curve ?? Curves.linear,
-      height: heightValue,
-      width: widthValue,
-      child: child,
+      duration: widget.duration ?? const Duration(seconds: 1),
+      onEnd: widget.onEnd,
+      curve: widget.curve ?? Curves.linear,
+      height: height,
+      width: width,
       decoration: BoxDecoration(
-          borderRadius: borderRadiusValue,
-          color: colorValue,
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: gradientColors as List<Color>),
-          boxShadow: shadowList),
+        borderRadius: borderRadiusValue,
+        color: colorValue,
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: gradientColors as List<Color>,
+        ),
+        boxShadow: shadowList,
+      ),
+      child: widget.child,
     );
   }
 }

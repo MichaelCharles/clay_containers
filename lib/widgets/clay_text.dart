@@ -1,6 +1,21 @@
+import 'package:clay_containers/extensions/context_extensions.dart';
+import 'package:clay_containers/utils/clay_utils.dart';
 import 'package:flutter/material.dart';
 
-class ClayText extends StatelessWidget {
+class ClayText extends StatefulWidget {
+  const ClayText(
+    this.text, {
+    super.key,
+    this.parentColor,
+    this.textColor,
+    this.color,
+    this.spread,
+    this.depth,
+    this.size,
+    this.style,
+    this.emboss,
+  });
+
   final String text;
   final Color? color;
   final Color? parentColor;
@@ -11,68 +26,93 @@ class ClayText extends StatelessWidget {
   final double? size;
   final bool? emboss;
 
-  ClayText(this.text,
-      {this.parentColor,
-      this.textColor,
-      this.color,
-      this.spread,
-      this.depth,
-      this.style,
-      this.size,
-      this.emboss});
+  @override
+  State<ClayText> createState() => _ClayTextState();
+}
 
-  Color _getAdjustColor(Color baseColor, amount) {
-    Map colors = {
-      "red": baseColor.red,
-      "green": baseColor.green,
-      "blue": baseColor.blue
-    };
-    colors = colors.map((key, value) {
-      if (value + amount < 0) return MapEntry(key, 0);
-      if (value + amount > 255) return MapEntry(key, 255);
-      return MapEntry(key, value + amount);
-    });
-    return Color.fromRGBO(colors["red"], colors["green"], colors["blue"], 1);
+class _ClayTextState extends State<ClayText> {
+  late Color color;
+  late Color? parentColor;
+  late Color? textColor;
+  late TextStyle style;
+  late double? spread;
+  late int depth;
+  late double size;
+  late bool emboss;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final textTheme = context.clayTheme?.textTheme;
+    color = widget.color ?? textTheme?.color ?? const Color(0xFFf0f0f0);
+    parentColor = widget.parentColor ?? textTheme?.parentColor;
+    textColor = widget.textColor ?? textTheme?.textColor;
+    style = widget.style ?? textTheme?.style ?? const TextStyle();
+    spread = widget.spread ?? textTheme?.spread;
+    depth = widget.depth ?? textTheme?.depth ?? 40;
+    size = widget.size ?? textTheme?.size ?? 14;
+    emboss = widget.emboss ?? textTheme?.emboss ?? false;
   }
 
-  double? _getSpread(base) {
-    double? calculated = (base / 10).floor().toDouble();
+  @override
+  void didUpdateWidget(covariant ClayText oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    final textTheme = context.clayTheme?.textTheme;
+    color = widget.color ?? textTheme?.color ?? const Color(0xFFf0f0f0);
+    parentColor = widget.parentColor ?? textTheme?.parentColor;
+    textColor = widget.textColor ?? textTheme?.textColor;
+    style = widget.style ?? textTheme?.style ?? const TextStyle();
+    spread = widget.spread ?? textTheme?.spread;
+    depth = widget.depth ?? textTheme?.depth ?? 40;
+    size = widget.size ?? textTheme?.size ?? 14;
+    emboss = widget.emboss ?? textTheme?.emboss ?? false;
+  }
+
+  double? _getSpread(double base) {
+    final calculated = (base / 10).floor().toDouble();
     return calculated == 0 ? 1 : calculated;
   }
 
   @override
   Widget build(BuildContext context) {
-    final int? depthValue = depth == null ? 40 : depth;
-    Color? colorValue = color == null ? Color(0xFFf0f0f0) : color;
-    final Color outerColorValue =
-        parentColor == null ? colorValue! : parentColor!;
-    double? fontSizeValue = size == null ? 14 : size;
-    final TextStyle styleValue = style == null ? TextStyle() : style!;
-    fontSizeValue =
-        styleValue.fontSize != null ? styleValue.fontSize : fontSizeValue;
-    final double spreadValue =
-        spread == null ? _getSpread(fontSizeValue)! : spread!;
-    final bool embossValue = emboss == null ? false : emboss!;
+    var colorValue = color;
+    final outerColorValue = parentColor ?? colorValue;
+    var fontSizeValue = size;
+    fontSizeValue = style.fontSize ?? fontSizeValue;
+    final spreadValue = spread ?? _getSpread(fontSizeValue)!;
 
-    List<Shadow> shadowList = [
+    var shadowList = <Shadow>[
       Shadow(
-          color: _getAdjustColor(
-              outerColorValue, embossValue ? 0 - depthValue! : depthValue),
-          offset: Offset(0 - spreadValue / 2, 0 - spreadValue / 2),
-          blurRadius: spreadValue),
+        color: ClayUtils.getAdjustColor(
+          outerColorValue,
+          emboss ? 0 - depth : depth,
+        ),
+        offset: Offset(0 - spreadValue / 2, 0 - spreadValue / 2),
+        blurRadius: spreadValue,
+      ),
       Shadow(
-          color: _getAdjustColor(
-              outerColorValue, embossValue ? depthValue : 0 - depthValue!),
-          offset: Offset(spreadValue / 2, spreadValue / 2),
-          blurRadius: spreadValue)
+        color: ClayUtils.getAdjustColor(
+          outerColorValue,
+          emboss ? depth : 0 - depth,
+        ),
+        offset: Offset(spreadValue / 2, spreadValue / 2),
+        blurRadius: spreadValue,
+      ),
     ];
 
-    if (embossValue) shadowList = shadowList.reversed.toList();
-    if (embossValue) colorValue = _getAdjustColor(colorValue!, 0 - depthValue!);
-    if (textColor != null) colorValue = textColor;
+    if (emboss) shadowList = shadowList.reversed.toList();
+    if (emboss) {
+      colorValue = ClayUtils.getAdjustColor(colorValue, 0 - depth);
+    }
+    if (textColor != null) colorValue = textColor!;
 
-    return Text(text,
-        style: styleValue.copyWith(
-            color: colorValue, shadows: shadowList, fontSize: fontSizeValue));
+    return Text(
+      widget.text,
+      style: style.copyWith(
+        color: colorValue,
+        shadows: shadowList,
+        fontSize: fontSizeValue,
+      ),
+    );
   }
 }
