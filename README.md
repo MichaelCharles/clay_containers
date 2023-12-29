@@ -172,6 +172,60 @@ You can use a `ClayAnimatedContainer` to create animations in the same way as yo
 
 ![Very animated. Much cool.](https://res.cloudinary.com/mca62511/image/upload/c_scale,h_300,w_300/v1579847878/animated_rktpdo.gif)
 
+
+
+### Theming
+
+You asked for it, you got it. Now you can specify your Clay Container's properties high up in your widget tree and that theme will apply to every Clay container you create under that `ClayTheme`. Simply introduce the `ClayTheme` anywhere in your widget tree and pass it a `ClayThemeData` to it's `themeData` property
+
+```dart
+ClayTheme(
+  themeData: const ClayThemeData(
+    height: 10,
+    width: 20,
+    borderRadius: 360,
+    textTheme: ClayTextTheme(style: TextStyle()),
+    depth: 12,
+  ),
+  child: (...),
+);
+```
+
+Now any `ClayWidget` that is an ancestor of this `ClayTheme` will inherit it's theme.
+
+Also notice the `ClayTextTheme` which will handle the theme of your `ClayText`.
+
+You can override any of these properties to give a specific `ClayWidget` custom theming. Simply give that property a value when you create it.
+
+```dart
+ClayTheme(
+  themeData: const ClayThemeData(
+    height: 10,
+    width: 20,
+    borderRadius: 360,
+    textTheme: ClayTextTheme(style: TextStyle()),
+    depth: 12,
+  ),
+  child: ClayAnimatedContainer(
+      height: 240,
+      width: 240,
+      child: ClayContainer(
+          borderRadius: 10,
+      ),
+  ),
+);
+```
+
+Now, the `ClayAnimatedContainer` in the code above will have a `height` and `width` of `240`, ignoring the `10` and `20` height and width respectively passed to the `ClayTheme`, but the `ClayContainer` will rather take `height` and `width` of `10` and `20` respectively, which is from the `ClayTheme`, but will override the `borderRadius` with a `10`.
+
+Both the `ClayThemeData` and the `ClayTextTheme` have only one default value
+
+```dart
+color: const Color(0xFFf0f0f0);
+```
+
+
+
 ### Full API Documentation
 
 #### `ClayContainer`
