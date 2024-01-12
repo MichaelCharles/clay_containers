@@ -1,4 +1,5 @@
 import 'package:clay_containers/constants.dart';
+import 'package:clay_containers/extensions/colour_extensions.dart';
 import 'package:clay_containers/extensions/context_extensions.dart';
 import 'package:clay_containers/utils/clay_utils.dart';
 import 'package:flutter/material.dart';
@@ -96,16 +97,14 @@ class _ClayContainerState extends State<ClayContainer> {
 
     var shadowList = <BoxShadow>[
       BoxShadow(
-        color: ClayUtils.getAdjustColor(
-          parentColorValue,
+        color: parentColorValue.withIncrement(
           widget.emboss ? 0 - depth : depth,
         ),
         offset: Offset(0 - spread, 0 - spread),
         blurRadius: spread,
       ),
       BoxShadow(
-        color: ClayUtils.getAdjustColor(
-          parentColorValue,
+        color: parentColorValue.withIncrement(
           widget.emboss ? depth : 0 - depth,
         ),
         offset: Offset(spread, spread),
@@ -115,7 +114,7 @@ class _ClayContainerState extends State<ClayContainer> {
 
     if (widget.emboss) shadowList = shadowList.reversed.toList();
     if (widget.emboss) {
-      colorValue = ClayUtils.getAdjustColor(colorValue, 0 - depth ~/ 2);
+      colorValue = colorValue.withIncrement(0 - depth ~/ 2);
     }
     if (surfaceColor != null) colorValue = surfaceColorValue;
 
