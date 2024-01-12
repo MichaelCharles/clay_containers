@@ -1,5 +1,5 @@
+import 'package:clay_containers/extensions/colour_extensions.dart';
 import 'package:clay_containers/extensions/context_extensions.dart';
-import 'package:clay_containers/utils/clay_utils.dart';
 import 'package:flutter/material.dart';
 
 class ClayText extends StatefulWidget {
@@ -83,16 +83,14 @@ class _ClayTextState extends State<ClayText> {
 
     var shadowList = <Shadow>[
       Shadow(
-        color: ClayUtils.getAdjustColor(
-          outerColorValue,
+        color: outerColorValue.withIncrement(
           emboss ? 0 - depth : depth,
         ),
         offset: Offset(0 - spreadValue / 2, 0 - spreadValue / 2),
         blurRadius: spreadValue,
       ),
       Shadow(
-        color: ClayUtils.getAdjustColor(
-          outerColorValue,
+        color: outerColorValue.withIncrement(
           emboss ? depth : 0 - depth,
         ),
         offset: Offset(spreadValue / 2, spreadValue / 2),
@@ -102,7 +100,7 @@ class _ClayTextState extends State<ClayText> {
 
     if (emboss) shadowList = shadowList.reversed.toList();
     if (emboss) {
-      colorValue = ClayUtils.getAdjustColor(colorValue, 0 - depth);
+      colorValue = colorValue.withIncrement(0 - depth);
     }
     if (textColor != null) colorValue = textColor!;
 
