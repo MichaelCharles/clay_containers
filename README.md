@@ -172,11 +172,9 @@ You can use a `ClayAnimatedContainer` to create animations in the same way as yo
 
 ![Very animated. Much cool.](https://res.cloudinary.com/mca62511/image/upload/c_scale,h_300,w_300/v1579847878/animated_rktpdo.gif)
 
-
-
 ### Theming
 
-You asked for it, you got it. Now you can specify your Clay Container's properties high up in your widget tree and that theme will apply to every Clay container you create under that `ClayTheme`. Simply introduce the `ClayTheme` anywhere in your widget tree and pass it a `ClayThemeData` to it's `themeData` property
+You asked for it, you got it. Now you can specify your clay container's properties high up in your widget tree and that theme will apply to every `ClayContainer` you create under that `ClayTheme`. Simply introduce the `ClayTheme` anywhere in your widget tree and pass it a `ClayThemeData` to it's `themeData` property.
 
 ```dart
 ClayTheme(
@@ -191,11 +189,11 @@ ClayTheme(
 );
 ```
 
-Now any `ClayWidget` that is an ancestor of this `ClayTheme` will inherit it's theme.
+Now any clay widget that is a child of this `ClayTheme` will inherit it's theme.
 
-Also notice the `ClayTextTheme` which will handle the theme of your `ClayText`.
+Also note that `ClayTextTheme` will handle the theme of your `ClayText`.
 
-You can override any of these properties to give a specific `ClayWidget` custom theming. Simply give that property a value when you create it.
+You can override any of these properties to give a specific clay widget custom theming. Simply give that property a value when you create it.
 
 ```dart
 ClayTheme(
@@ -223,8 +221,6 @@ Both the `ClayThemeData` and the `ClayTextTheme` have only one default value
 ```dart
 color: const Color(0xFFf0f0f0);
 ```
-
-
 
 ### Full API Documentation
 
