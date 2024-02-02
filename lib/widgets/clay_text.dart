@@ -14,6 +14,7 @@ class ClayText extends StatefulWidget {
     this.size,
     this.style,
     this.emboss,
+    this.textAlign,
   });
 
   final String text;
@@ -25,6 +26,7 @@ class ClayText extends StatefulWidget {
   final int? depth;
   final double? size;
   final bool? emboss;
+  final TextAlign? textAlign;
 
   @override
   State<ClayText> createState() => _ClayTextState();
@@ -106,6 +108,7 @@ class _ClayTextState extends State<ClayText> {
 
     return Text(
       widget.text,
+      textAlign: widget.textAlign,
       style: style.copyWith(
         color: colorValue,
         shadows: shadowList,
