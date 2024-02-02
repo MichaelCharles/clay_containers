@@ -19,6 +19,8 @@ class ClayContainer extends StatefulWidget {
     this.curveType,
     this.depth,
     this.emboss = false,
+    this.gradient,
+    this.boxShadow,
   });
 
   final double? height;
@@ -33,6 +35,8 @@ class ClayContainer extends StatefulWidget {
   final CurveType? curveType;
   final int? depth;
   final bool emboss;
+  final Gradient? gradient;
+  final List<BoxShadow>? boxShadow;
 
   @override
   State<ClayContainer> createState() => _ClayContainerState();
@@ -143,12 +147,12 @@ class _ClayContainerState extends State<ClayContainer> {
       decoration: BoxDecoration(
         borderRadius: borderRadiusValue,
         color: colorValue,
-        gradient: LinearGradient(
+        gradient: widget.gradient ?? LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: gradientColors as List<Color>,
         ),
-        boxShadow: shadowList,
+        boxShadow: widget.boxShadow ?? shadowList,
       ),
       child: widget.child,
     );
