@@ -1,4 +1,5 @@
 import 'package:clay_containers/constants.dart';
+import 'package:clay_containers/extensions/colour_extensions.dart';
 import 'package:clay_containers/extensions/context_extensions.dart';
 import 'package:clay_containers/utils/clay_utils.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,8 @@ class ClayContainer extends StatefulWidget {
     this.curveType,
     this.depth,
     this.emboss = false,
+    this.gradient,
+    this.boxShadow,
   });
 
   final double? height;
@@ -32,6 +35,8 @@ class ClayContainer extends StatefulWidget {
   final CurveType? curveType;
   final int? depth;
   final bool emboss;
+  final Gradient? gradient;
+  final List<BoxShadow>? boxShadow;
 
   @override
   State<ClayContainer> createState() => _ClayContainerState();
@@ -96,16 +101,14 @@ class _ClayContainerState extends State<ClayContainer> {
 
     var shadowList = <BoxShadow>[
       BoxShadow(
-        color: ClayUtils.getAdjustColor(
-          parentColorValue,
+        color: parentColorValue.withIncrement(
           widget.emboss ? 0 - depth : depth,
         ),
         offset: Offset(0 - spread, 0 - spread),
         blurRadius: spread,
       ),
       BoxShadow(
-        color: ClayUtils.getAdjustColor(
-          parentColorValue,
+        color: parentColorValue.withIncrement(
           widget.emboss ? depth : 0 - depth,
         ),
         offset: Offset(spread, spread),
@@ -115,7 +118,7 @@ class _ClayContainerState extends State<ClayContainer> {
 
     if (widget.emboss) shadowList = shadowList.reversed.toList();
     if (widget.emboss) {
-      colorValue = ClayUtils.getAdjustColor(colorValue, 0 - depth ~/ 2);
+      colorValue = colorValue.withIncrement(0 - depth ~/ 2);
     }
     if (surfaceColor != null) colorValue = surfaceColorValue;
 
@@ -144,12 +147,12 @@ class _ClayContainerState extends State<ClayContainer> {
       decoration: BoxDecoration(
         borderRadius: borderRadiusValue,
         color: colorValue,
-        gradient: LinearGradient(
+        gradient: widget.gradient ?? LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: gradientColors as List<Color>,
         ),
-        boxShadow: shadowList,
+        boxShadow: widget.boxShadow ?? shadowList,
       ),
       child: widget.child,
     );
